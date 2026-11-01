@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login - BIDMASTER</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>BIDMASTER ADMIN</h1>
+</header>
+
+<div class="container">
+    <h1>Admin Login</h1>
+    <p>Welcome to the BIDMASTER Administration Panel.</p>
+
+    <form action="/admin-login" method="POST">
+
+        <label>Admin Email</label>
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter admin email"
+            required
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter admin password"
+            required
+        >
+
+        <button type="submit">Login as Admin</button>
+
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BIDMASTER | Premium Online Auction</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b1120;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 7%;
+            background: #111827;
+            border-bottom: 1px solid #b8860b;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            color: #f5c542;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #f5c542;
+        }
+
+        .hero {
+            min-height: 530px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 70px 8%;
+            gap: 35px;
+            background:
+                radial-gradient(circle at 80% 40%, #28334b 0%, #0b1120 60%);
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            line-height: 1.2;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #f5c542;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            width: 42%;
+            max-width: 450px;
+            border-radius: 18px;
+            border: 2px solid #b8860b;
+            box-shadow: 0 10px 40px rgba(245,197,66,0.15);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #111827;
+            padding: 14px 25px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #d4a72c;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: #f5c542;
+            border: 1px solid #f5c542;
+        }
+
+        .secondary-btn:hover {
+            background: #f5c542;
+            color: #111827;
+        }
+
+        .features {
+            padding: 65px 8%;
+            text-align: center;
+        }
+
+        .section-title {
+            color: #f5c542;
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            color: #94a3b8;
+            margin-bottom: 35px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: #172033;
+            border: 1px solid #39445a;
+            border-radius: 12px;
+            padding: 35px 20px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+            border-color: #f5c542;
+        }
+
+        .feature-card .emoji {
+            font-size: 40px;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            color: #f5c542;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .cta {
+            margin: 20px 8% 65px;
+            padding: 55px 25px;
+            text-align: center;
+            background: #172033;
+            border: 1px solid #b8860b;
+            border-radius: 15px;
+        }
+
+        .cta h2 {
+            color: #f5c542;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #cbd5e1;
+            margin-bottom: 25px;
+        }
+
+        footer {
+            background: #111827;
+            padding: 25px;
+            text-align: center;
+            color: #94a3b8;
+            border-top: 1px solid #39445a;
+        }
+
+        footer span {
+            color: #f5c542;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 8px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 55px 6%;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-image {
+                width: 100%;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">BIDMASTER</div>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/auctions">Auctions</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            <a href="/admin-login">Admin</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Discover.
+                <span>Bid.</span>
+                Win.
+            </h1>
+
+            <p>
+                Welcome to BIDMASTER, your premium online auction
+                destination. Explore amazing products, compete with
+                other bidders and win your favourite items.
+            </p>
+
+            <a href="/register" class="btn">
+                Get Started
+            </a>
+
+            <a href="/login" class="btn secondary-btn">
+                Start Bidding
+            </a>
+
+        </div>
+
+        <img
+            class="hero-image"
+            src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900"
+            alt="Online shopping and bidding"
+        >
+
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+
+        <h2 class="section-title">Why Choose BIDMASTER?</h2>
+
+        <p class="section-description">
+            Experience a smarter and more exciting way to participate in auctions.
+        </p>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <div class="emoji">⚡</div>
+                <h3>Live Bidding</h3>
+                <p>
+                    Watch bid updates in real time and compete
+                    with other users.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="emoji">🔒</div>
+                <h3>Secure Accounts</h3>
+                <p>
+                    Register and log in to manage your auction
+                    activities.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="emoji">🏆</div>
+                <h3>Win Auctions</h3>
+                <p>
+                    Place competitive bids and become the
+                    highest bidder when an auction ends.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta">
+
+        <h2>Ready to Start Bidding?</h2>
+
+        <p>
+            Join BIDMASTER and discover exciting auction opportunities.
+        </p>
+
+        <a href="/register" class="btn">
+            Create Your Account
+        </a>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            © 2026 <span>BIDMASTER</span>.
+            Digital Auction & Bidding Management System.
+        </p>
+    </footer>
+
+</body>
+</html>

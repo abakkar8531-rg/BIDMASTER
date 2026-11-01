@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bids | BIDMASTER</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #101010;
+            color: white;
+        }
+
+        nav {
+            background: #1b1b1b;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+        }
+
+        .logo {
+            color: #d4af37;
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .table-box {
+            overflow-x: auto;
+            background: #1c1c1c;
+            border: 1px solid #444;
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        th {
+            background: #292929;
+            color: #d4af37;
+        }
+
+        td {
+            color: #ddd;
+        }
+
+        .amount {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .empty {
+            background: #1c1c1c;
+            border: 1px solid #444;
+            padding: 35px;
+            text-align: center;
+            border-radius: 12px;
+            color: #aaa;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 13px 22px;
+            background: #d4af37;
+            color: #111;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: #888;
+            padding: 30px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">BIDMASTER</div>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/auctions">Auctions</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>My Bidding History</h1>
+
+    <p class="subtitle">
+        View all the bids you have placed on BIDMASTER.
+    </p>
+
+    <% if (bids.length > 0) { %>
+
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bid ID</th>
+                        <th>Product</th>
+                        <th>Bid Amount</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% bids.forEach(bid => { %>
+                        <tr>
+                            <td><%= bid.id %></td>
+
+                            <td>
+                                <%= bid.auction_title %>
+                            </td>
+
+                            <td class="amount">
+                                ₹<%= Number(bid.amount).toLocaleString('en-IN') %>
+                            </td>
+
+                            <td>
+                                <%= bid.created_at %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+    <% } else { %>
+
+        <div class="empty">
+            <h2>No Bids Yet!</h2>
+            <p>You have not placed any bids.</p>
+            <a href="/auctions" class="btn">Explore Auctions</a>
+        </div>
+
+    <% } %>
+
+    <a href="/dashboard" class="btn">Back to Dashboard</a>
+
+</div>
+
+<footer>
+    © 2026 BIDMASTER. All Rights Reserved.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= auction.title %> | BIDMASTER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #101010;
+            color: #fff;
+        }
+
+        nav {
+            background: #181818;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            color: #d4af37;
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 70px auto;
+            padding: 20px;
+        }
+
+        .auction-card {
+            background: #1c1c1c;
+            border: 1px solid #444;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .tag {
+            color: #d4af37;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #bbb;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .price-box {
+            background: #292929;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .price-label {
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #d4af37;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .end-time {
+            color: #ccc;
+            margin: 20px 0;
+        }
+
+        form {
+            margin-top: 25px;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            background: #101010;
+            color: white;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            padding: 15px;
+            background: #d4af37;
+            color: #111;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #f0cc55;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            color: #888;
+            padding: 30px;
+        }
+
+        @media(max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 5px;
+            }
+
+            .auction-card {
+                padding: 25px 15px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">BIDMASTER</div>
+    <div>
+        <a href="/">Home</a>
+        <a href="/auctions">Auctions</a>
+        <a href="/my-bids">My Bids</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="auction-card">
+
+        <div class="tag">LIVE AUCTION</div>
+
+        <h1><%= auction.title %></h1>
+
+        <p class="description">
+            <%= auction.description %>
+        </p>
+
+        <div class="price-box">
+            <p class="price-label">Starting Price</p>
+            <div>₹<%= Number(auction.starting_price).toLocaleString('en-IN') %></div>
+        </div>
+
+        <div class="price-box">
+            <p class="price-label">Current Highest Bid</p>
+            <div class="price" id="currentBid">
+                ₹<%= Number(auction.current_bid).toLocaleString('en-IN') %>
+            </div>
+        </div>
+
+        <p class="end-time">
+            Auction ends: <%= auction.end_time %>
+        </p>
+
+        <form action="/bid/<%= auction.id %>" method="POST">
+            <input
+                type="number"
+                name="amount"
+                id="bidAmount"
+                min="<%= Number(auction.current_bid) + 0.01 %>"
+                step="0.01"
+                placeholder="Enter your bid amount (₹)"
+                required
+            >
+
+            <button type="submit">PLACE YOUR BID</button>
+        </form>
+
+        <a href="/auctions" class="back">
+            ← Back to All Auctions
+        </a>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 BIDMASTER. All Rights Reserved.
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    const auctionId = <%= auction.id %>;
+
+    socket.on('bidUpdated', function(data) {
+        if (Number(data.auctionId) === auctionId) {
+            document.getElementById('currentBid').textContent =
+                '₹' + Number(data.amount).toLocaleString('en-IN');
+
+            document.getElementById('bidAmount').min =
+                Number(data.amount) + 0.01;
+        }
+    });
+</script>
+
+</body>
+</html>

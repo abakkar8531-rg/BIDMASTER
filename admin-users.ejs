@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIDMASTER - Registered Users</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fa;
+            padding: 25px;
+            color: #101c36;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .header {
+            background: #101c36;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-top: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+            overflow-x: auto;
+        }
+
+        .count {
+            color: #087f8c;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            min-width: 500px;
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #101c36;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f4f6fa;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: #087f8c;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .empty {
+            padding: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>BIDMASTER - Registered Users</h1>
+        <p>Administrator User Management Panel</p>
+    </div>
+
+    <div class="card">
+
+        <h2>Total Registered Users</h2>
+
+        <div class="count">
+            <%= users.length %>
+        </div>
+
+        <h2>All Registered Users</h2>
+
+        <% if (users.length === 0) { %>
+
+            <p class="empty">No users have registered yet.</p>
+
+        <% } else { %>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email Address</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% users.forEach(function(user) { %>
+
+                        <tr>
+                            <td><%= user.id %></td>
+                            <td><%= user.name %></td>
+                            <td><%= user.email %></td>
+                        </tr>
+
+                    <% }); %>
+                </tbody>
+            </table>
+
+        <% } %>
+
+        <a href="/admin-dashboard" class="btn">
+            Back to Admin Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

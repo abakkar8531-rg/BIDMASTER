@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Live Auctions | BIDMASTER</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b1120;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        header {
+            background: #111827;
+            padding: 20px 7%;
+            border-bottom: 1px solid #b8860b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #f5c542;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        header a:hover {
+            color: #f5c542;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        h1 {
+            color: #f5c542;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 650px;
+            margin: 0 auto 35px;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px;
+            background: #172033;
+            border: 1px solid #64748b;
+            border-radius: 6px;
+            color: white;
+            font-size: 15px;
+        }
+
+        .search-box button {
+            background: #f5c542;
+            color: #111827;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .auction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .auction-card {
+            background: #172033;
+            border: 1px solid #39445a;
+            border-radius: 12px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .auction-card:hover {
+            transform: translateY(-6px);
+            border-color: #f5c542;
+            box-shadow: 0 10px 25px rgba(245,197,66,0.1);
+        }
+
+        .product-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .auction-card h2 {
+            color: #f5c542;
+            margin-bottom: 12px;
+        }
+
+        .description {
+            color: #cbd5e1;
+            line-height: 1.6;
+            min-height: 48px;
+        }
+
+        .price {
+            color: #f5c542;
+            font-size: 21px;
+            font-weight: bold;
+            margin: 18px 0;
+        }
+
+        .starting {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .end-time {
+            color: #94a3b8;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+
+        .view-btn {
+            display: block;
+            text-align: center;
+            background: #f5c542;
+            color: #111827;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .view-btn:hover {
+            background: #d4a72c;
+        }
+
+        .empty {
+            text-align: center;
+            background: #172033;
+            padding: 35px;
+            border-radius: 10px;
+            color: #cbd5e1;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            color: #f5c542;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #111827;
+            text-align: center;
+            padding: 22px;
+            color: #94a3b8;
+            margin-top: 50px;
+        }
+
+        @media(max-width: 600px) {
+            header {
+                flex-direction: column;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">BIDMASTER</div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/my-bids">My Bids</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <h1>🏆 Explore Live Auctions</h1>
+
+        <p class="subtitle">
+            Discover products, place your bids and win exciting auctions.
+        </p>
+
+        <form action="/auctions" method="GET" class="search-box">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search for products..."
+                value="<%= search || '' %>"
+            >
+
+            <button type="submit">🔍 Search</button>
+
+        </form>
+
+        <% if (auctions.length > 0) { %>
+
+            <div class="auction-grid">
+
+                <% auctions.forEach(function(auction) { %>
+
+                    <div class="auction-card">
+
+                        <div class="product-icon">🛍️</div>
+
+                        <h2><%= auction.title %></h2>
+
+                        <p class="description">
+                            <%= auction.description %>
+                        </p>
+
+                        <p class="price">
+                            Current Bid: ₹<%= auction.current_bid %>
+                        </p>
+
+                        <p class="starting">
+                            Starting Price: ₹<%= auction.starting_price %>
+                        </p>
+
+                        <p class="end-time">
+                            Ends: <%= auction.end_time %>
+                        </p>
+
+                        <a
+                            href="/auction/<%= auction.id %>"
+                            class="view-btn">
+                            View & Place Bid
+                        </a>
+
+                    </div>
+
+                <% }); %>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="empty">
+                <h2>No Auctions Found</h2>
+                <p>Try searching with a different product name.</p>
+            </div>
+
+        <% } %>
+
+        <a href="/dashboard" class="back">
+            ← Back to Dashboard
+        </a>
+
+    </main>
+
+    <footer>
+        © 2026 BIDMASTER | Digital Auction & Bidding Management System
+    </footer>
+
+</body>
+</html>

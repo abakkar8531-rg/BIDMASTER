@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Winners | BIDMASTER</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #172554;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #172554;
+            color: white;
+        }
+
+        .winner {
+            color: green;
+            font-weight: bold;
+        }
+
+        .active {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🏆 Auction Winners</h1>
+
+        <p>Total Auctions: <%= auctions.length %></p>
+
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Starting Price</th>
+                <th>Status</th>
+                <th>Winner</th>
+                <th>Winning Bid</th>
+            </tr>
+
+            <% auctions.forEach(function(auction) { %>
+                <tr>
+                    <td><%= auction.title %></td>
+                    <td>₹<%= auction.starting_price %></td>
+
+                    <td>
+                        <% if (auction.ended) { %>
+                            <span class="winner">Ended</span>
+                        <% } else { %>
+                            <span class="active">Active</span>
+                        <% } %>
+                    </td>
+
+                    <td>
+                        <% if (!auction.ended) { %>
+                            Not decided
+                        <% } else if (auction.winner) { %>
+                            <%= auction.winner.winner_name %>
+                            <br>
+                            <small><%= auction.winner.winner_email %></small>
+                        <% } else { %>
+                            No bids
+                        <% } %>
+                    </td>
+
+                    <td>
+                        <% if (auction.ended && auction.winner) { %>
+                            ₹<%= auction.winner.amount %>
+                        <% } else { %>
+                            —
+                        <% } %>
+                    </td>
+                </tr>
+            <% }); %>
+        </table>
+
+        <a href="/admin-dashboard">← Back to Admin Dashboard</a>
+    </div>
+</body>
+</html>

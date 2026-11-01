@@ -1,0 +1,183 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BIDMASTER - All Bids</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 30px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .table-container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        .table-container h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        th {
+            background: #243b55;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .amount {
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>BIDMASTER - All Bids</h1>
+        <p>View all bidding activities from registered users.</p>
+    </header>
+
+    <a href="/admin-dashboard" class="back-btn">
+        Back to Admin Dashboard
+    </a>
+
+    <div class="table-container">
+
+        <h2>Bidding History</h2>
+
+        <p>Total Bids: <strong><%= bids.length %></strong></p>
+
+        <br>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Bid ID</th>
+                    <th>User Name</th>
+                    <th>Auction Product</th>
+                    <th>Bid Amount</th>
+                    <th>Date and Time</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% if (bids.length > 0) { %>
+
+                    <% bids.forEach(function(bid) { %>
+
+                        <tr>
+                            <td><%= bid.id %></td>
+
+                            <td><%= bid.user_name %></td>
+
+                            <td><%= bid.auction_title %></td>
+
+                            <td class="amount">
+                                ₹<%= Number(bid.amount).toLocaleString('en-IN') %>
+                            </td>
+
+                            <td>
+                                <%= bid.created_at %>
+                            </td>
+                        </tr>
+
+                    <% }); %>
+
+                <% } else { %>
+
+                    <tr>
+                        <td colspan="5" class="empty">
+                            No bids have been placed yet.
+                        </td>
+                    </tr>
+
+                <% } %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+```

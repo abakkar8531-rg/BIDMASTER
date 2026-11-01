@@ -1,0 +1,70 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Auction - BIDMASTER</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fa;
+            padding: 30px;
+        }
+        .form-container {
+            max-width: 550px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px #ddd;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            background: #087f8c;
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add New Auction</h1>
+        <p>Enter the product details below.</p>
+
+        <form action="/admin/add-auction" method="POST">
+            <label>Product Name</label>
+            <input type="text" name="title" required>
+
+            <label>Description</label>
+            <textarea name="description" rows="4" required></textarea>
+
+            <label>Starting Price (₹)</label>
+            <input type="number" name="starting_price"
+                   min="1" step="1" required>
+
+            <label>Auction End Date and Time</label>
+            <input type="datetime-local" name="end_time" required>
+
+            <button type="submit">Add Auction</button>
+        </form>
+
+        <p><a href="/admin-dashboard">Back to Admin Dashboard</a></p>
+    </div>
+</body>
+</html>
+```
